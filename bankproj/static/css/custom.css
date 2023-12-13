@@ -1,0 +1,72 @@
+.welcome {
+       font-size: 24px;
+       margin-bottom: 20px;
+        }
+
+
+.banner-image {
+            width: 100%;
+            max-width: 1640px; /* Set the maximum width */
+            height: auto;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+.login-register {
+        text-align: right;
+        }
+
+.login-register a {
+       margin-left: 10px;
+        }
+
+.my_footer{
+
+    background-color: #ebf6ee;
+    height:60px;
+    padding:10px;
+    bottom:0;
+    margin-top: auto;
+    }
+.my_footer p{
+    padding-top:20px;
+    font-size:14px;
+    }
+
+main {
+      flex: 1; /* Allow main content to take up remaining space */
+      padding: 20px;
+    }
+
+.card {
+     max-width: 400px;
+     width: 100%;
+
+        }
+.card-body {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+ .card-header {
+      background-color: #4caf50;
+      color: #fff;
+      text-align:center;
+      padding: 10px;
+      border-radius: 8px 8px 0 0;
+        }
+ .card-body {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+.submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }

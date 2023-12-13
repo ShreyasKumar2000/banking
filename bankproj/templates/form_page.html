@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+Home
+{% endblock %}
+
+
+{% block content %}
+
+<br>
+<div class="card col-md-4 mx-auto">
+    <div class="card-header" style="background-color: #FF0000;">
+        <h2>Form Page</h2>
+    </div>
+
+    <div class="card-body">
+        <form method="POST" action="{% url 'form_page' %}">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <input type="hidden" id="user" name="user" value="{{ request.user.id }}">
+            </div>
+            </form>
+
+            <form method="POST" action="{% url 'form_page' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <b><label for="name">Name:</label></b>
+                <input type="text" id="name" name="name" required class="form-control" placeholder="Enter your name">
+            </div>
+</form>
+                <form method="POST" action="{% url 'form_page' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <b><label for="dob">Date of Birth:</label></b>
+                <input type="date" id="dob" name="dob" required class="form-control">
+            </div>
+                    </form>
+<form method="POST" action="{% url 'form_page' %}">
+            {% csrf_token %}
+            <div class="form-group">
+               <b> <label for="age">Age:</label></b>
+                <input type="number" id="age" name="age" required class="form-control" placeholder="Enter your age">
+            </div>
+    </form>
+<form method="POST" action="{% url 'form_page' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <b><label for="gender">Gender:</label></b>
+                <select id="gender" name="gender" required class="form-control">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+    </form>
+<form method="POST" action="{% url 'form_page' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <b><label for="phone_number">Phone Number:</label></b>
+                <input type="tel" id="phone_number" name="phone_number" required class="form-control" placeholder="Enter your phone-number">
+            </div>
+    </form>
+<form method="POST" action="{% url 'form_page' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <b><label for="email">Email:</label></b>
+                <input type="email" id="email" name="email" required class="form-control" placeholder="Enter your e-mail">
+            </div>
+    </form>
+<form method="POST" action="{% url 'form_page' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <b><label for="address">Address:</label></b>
+                <textarea id="address" name="address" required class="form-control"></textarea>
+            </div>
+</form>
+
+       <b> <label>Branch:</label></b>
+        <div class="form-group form-control">
+<form method="get" action="{% url 'form_page' %}" id="districtForm">
+
+    <b><label for="id_district">District:</label></b>
+
+    <select name="district" id="id_district" onchange="submitForm()" style="width:75% ;border-radius: 5px;padding: 10px; border: 1px solid #ccc;">
+        <option value="" selected>Select District</option>
+        {% for district in districts %}
+            <option value="{{ district.id }}" {% if district.id == selected_district.id %}selected{% endif %}>{{ district.name }}</option>
+        {% endfor %}
+    </select>
+</form>
+            <br>
+<form method="POST" action="{% url 'form_page' %}">
+            {% csrf_token %}
+        <b><label for="id_branch">Branch:</label></b>
+        <select name="branch" id="id_branch" required style="width:75%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+            <option value="" selected>Select Branch</option>
+            {% for branch in branches %}
+                <option value="{{ branch.id }}">{{ branch.name }}</option>
+            {% endfor %}
+        </select>
+</form>
+</div>
+    <div class="form-group">
+        <b><label for="account_type">Account Type:</label></b>
+        <select name="account_type" id="account_type" required class="form-control" >
+            <option value="" selected>Select Account Type</option>
+            <option value="savings">Savings Account</option>
+            <option value="current">Current Account</option>
+            <!-- Add more options as needed -->
+        </select>
+    </div>
+
+    <div class="form-group">
+        <b><label>Materials Provide:</label></b><br>
+        <div class="form-group form-control">
+        <div class="container" style="text-align:justify">
+        <label for="id_debit_card">
+            <input type="checkbox" name="materials_provide" id="id_debit_card" value="debit_card">
+            Debit Card
+        </label><br>
+        <label for="id_credit_card">
+            <input type="checkbox" name="materials_provide" id="id_credit_card" value="credit_card">
+            Credit Card
+        </label><br>
+        <label for="id_cheque_book">
+            <input type="checkbox" name="materials_provide" id="id_cheque_book" value="cheque_book">
+            Cheque Book
+        </label><br>
+        </div>
+            </div>
+
+    </div>
+        <br>
+        <div style="text-align:center">
+        <form method="POST" action="{% url 'form_page' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+            </div>
+    </div>
+</div>
+
+<script>
+    function submitForm(formId) {
+        // Use AJAX to submit the specified form without a page refresh
+        $.ajax({
+            type: $("#" + formId).attr("method"),
+            url: $("#" + formId).attr("action"),
+            data: $("#" + formId).serialize(),
+            success: function (data) {
+                // Update the content of the corresponding form div with the response from the server
+                $("#" + formId).html(data);
+            }
+        });
+    }
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Preserve the selected branch when the page loads
+        var selectedBranch = "{{ selected_branch.id }}" || "";
+        document.getElementById('id_branch').value = selectedBranch;
+
+        // Handle district selection change
+        document.getElementById('id_district').addEventListener('change', function() {
+            var selectedDistrictId = this.value;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', "{% url 'get_branches' %}?district_id=" + selectedDistrictId, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var branchesData = JSON.parse(xhr.responseText);
+                    updateBranchesDropdown(branchesData);
+                }
+            };
+            xhr.send();
+        });
+
+        function updateBranchesDropdown(branchesData) {
+            var branchesDropdown = document.getElementById('id_branch');
+            branchesDropdown.innerHTML = '';
+
+            for (var i = 0; i < branchesData.length; i++) {
+                var option = document.createElement('option');
+                option.value = branchesData[i].id;
+                option.text = branchesData[i].name;
+                branchesDropdown.appendChild(option);
+            }
+        }
+    });
+</script>
+{% endblock %}
+
+
+
+

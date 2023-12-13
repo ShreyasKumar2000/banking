@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+Home
+{% endblock %}
+
+
+{% block content %}
+<br>
+<div class="card col-md-4 mx-auto">
+    <div class="card-header" style="background-color: #3498db">
+        <h3>REGISTER</h3>
+    </div>
+    <div class="card-body">
+<!--        {% if messages %}-->
+<!--            <ul class="messages">-->
+<!--                {% for message in messages %}-->
+<!--                    <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>-->
+<!--                {% endfor %}-->
+<!--            </ul>-->
+<!--        {% endif %}-->
+<!--        {% if form.errors %}-->
+<!--            <div class="alert alert-danger" role="alert">-->
+<!--                <strong>Error:</strong> Please correct the following errors.-->
+<!--                <ul>-->
+<!--                    {% for field, error in form.errors.items %}-->
+<!--                        <li>{{ field }}: {{ error }}</li>-->
+<!--                    {% endfor %}-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        {% endif %}-->
+      {% for msg in messages %}
+    <h6 style="color: red;">Error: {{ msg }}</h6>
+{% endfor %}
+
+        <form method="POST" action="{% url 'register_user' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="password1">Password:</label>
+                <input type="password" id="password1" name="password1" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="password2">Confirm Password:</label>
+                <input type="password" id="password2" name="password2" required class="form-control">
+            </div>
+            <br>
+            <button class="submit-btn" type="submit">Register</button>
+        </form>
+        <div class="register-link">
+            <p>Already have an account? <a href="{% url 'login' %}" style="color: #0000FF;">Login</a></p>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

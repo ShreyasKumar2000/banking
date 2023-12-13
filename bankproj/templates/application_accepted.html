@@ -1,0 +1,16 @@
+<!-- application_accepted.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+Application Accepted
+{% endblock %}
+
+
+{% block content %}
+    <h1>Application Accepted!</h1>
+    <p>Your application has been successfully accepted. Thank you for applying!</p>
+
+    <a href="{% url 'home' %} "style="color:blue;">Return to Home</a>
+{% endblock %}

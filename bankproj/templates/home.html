@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block title %}
+Home
+{% endblock %}
+
+
+{% block content %}
+        <div class="content-container">
+            <br>
+            <div class="welcome">
+                {% if user.is_authenticated %}
+                    <h1>Welcome to IconBank, {{ user.username }}!</h1>
+                    <p style="text-align: justify;">Experience banking reimagined with IconBank's cutting-edge features, real-time updates, and personalized services. Your financial journey starts here. Ready to join? Click "Create Account" now!</p>
+                <div style="text-align:center">
+                -----><a href="{% url 'form_page'  %}"><button style="display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            color: #000000; /* Black text color */
+            background-color: #ffeb3b; /* Yellow background color */
+            border: 2px solid #ffeb3b; /* Yellow border color */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow for border */
+            cursor: pointer;">Create Account</button></a><----
+                    </div>
+                {% else %}
+                    <h1 style="text-align: center">Welcome to ICONBANK!</h1>
+                    <p style="text-align: justify;">Welcome to our cutting-edge banking platform, where innovation meets simplicity. Our sleek and intuitive website offers a seamless user experience, providing easy access to a range of financial services from personal banking to business solutions. Security is paramount, with state-of-the-art encryption safeguarding your information. Stay informed with advanced analytics, and explore a world of financial possibilities that adapts to your needs. Experience the future of banking with us – where technology and reliability converge for a smarter, more connected financial journey.</p>
+                {% endif %}
+            </div>
+
+            <img class="banner-image" src="{% static 'image/banner.jpg' %}" alt="Banner Image">
+        </div>
+{% endblock %}
